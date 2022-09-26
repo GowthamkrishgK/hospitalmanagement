@@ -12,7 +12,8 @@ import org.springframework.data.jpa.repository.Query;
 import com.project.demo.model.*;
 
 public interface DoctorPrescriptionRepository extends JpaRepository<DoctorPrescription, Integer> {
-@Query(value="select * from doctor_prescription dp LEFT JOIN appointment p ON p.patientname=dp.patientname and p.patientname=?1",nativeQuery =true)
+	
+@Query(value="select dp.description,dp.patientname,d.name,d.department,d.email,d.phone from doctor_prescription dp INNER JOIN appointment p ON dp.patientname=p.patientname and dp.patientname=?1",nativeQuery = true)
 DoctorPrescription findbyPatientname(String name); 
 }
 //SELECT *

@@ -24,6 +24,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name="loginUser")
 public class User implements UserDetails {
+	public Userdetails getUser() {
+		return user;
+	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userid;

@@ -52,6 +52,7 @@ private List<UserAppointment> appointment;
 
 @OneToOne(cascade=CascadeType.ALL)
 @JoinColumn(name="userid")
+@JsonIgnoreProperties("doctor")
 private User user;
 
 

@@ -1,7 +1,8 @@
 package com.project.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,5 +20,9 @@ public String addPrescription(@RequestBody PrescribeRequest pres) {
 	
 	 prescribeservice.addprescription(pres);
 	 return "prescribed" +pres.getPatientname();
+}
+@GetMapping("/viewPrescription/{name}")
+public DoctorPrescription viewPrescription(@PathVariable("name")String name) {
+	return prescribeservice.viewPrescription(name);
 }
 }

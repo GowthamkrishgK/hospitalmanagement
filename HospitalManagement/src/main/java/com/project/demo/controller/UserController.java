@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,13 +52,13 @@ public String addUser(@RequestBody userRequest u) {
 @GetMapping("/admin/user/name")
 public Userdetails getUser(@RequestParam( "name")String name) {
 	
-	return serve.finduserbyname(name);
+	return serve.finduserbyname();
 	
 }
 @GetMapping("/user")
 public Userdetails getUserbyName() {
-	String name="";
-	return serve.finduserbyname(name);
+
+	return serve.finduserbyname();
 	
 }
 

@@ -11,6 +11,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -84,7 +86,10 @@ public String DeleteByName( String name) {
 	return "User Removed "+name;
 }
 
-public Userdetails finduserbyname(String name) {
+public Userdetails finduserbyname() {
+	Authentication a=  SecurityContextHolder.getContext().getAuthentication();
+	User u=(User) a.getPrincipal();
+	String name=u.getUser().getName();
 	return userRepo.findbyname(name);
 }
 public Userdetails findbyemail(String email){

@@ -61,5 +61,8 @@ public String deleteDoctorPrescription(int id) {
 	return "DoctorPrescription Removed "+id;
 }
 
-
+public DoctorPrescription viewPrescription(String name) {
+	
+	return prescription.findbyPatientname(name);
+}
 }

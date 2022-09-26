@@ -37,7 +37,7 @@ public void saveDoctor(DoctorRequest doctor) {
 	u.setDoctor(d);
 	u.setAuthorities(doctorrole);
 	u.setUsername(d.getEmail());
-	u.setPassword(doctor.getPassword());
+	u.setPassword(encoder.encode(doctor.getPassword()));
 	u=user.save(u);
 	d.setUser(u);
 	d=doctorrepository.save(d);
