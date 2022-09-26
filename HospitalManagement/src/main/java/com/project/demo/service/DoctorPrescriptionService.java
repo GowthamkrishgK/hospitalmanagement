@@ -12,6 +12,7 @@ import com.project.demo.model.*;
 
 import com.project.demo.repository.*;
 import com.project.demo.requests.PrescribeRequest;
+import com.project.demo.response.Prescriptionresponse;
 import com.project.demo.repository.DoctorPrescriptionRepository;
 import com.project.demo.repository.DoctorRepository;
 import com.project.demo.repository.UserAppointmentRepository;
@@ -24,7 +25,7 @@ private DoctorPrescriptionRepository prescription;
 private UserAppointmentRepository appointmentrepo;
 @Autowired
 private DoctorRepository doctorRepo;
-
+private final String  delimitors=",";
 
 public UserAppointment addprescription(PrescribeRequest prescript) {
 	  DoctorPrescription pres= prescript.toPrescription();
@@ -61,8 +62,19 @@ public String deleteDoctorPrescription(int id) {
 	return "DoctorPrescription Removed "+id;
 }
 
-public DoctorPrescription viewPrescription(String name) {
+public Prescriptionresponse viewPrescription(String name) {
+	String a=prescription.findbyPatientname(name);
+	   String arr[]=a.split(delimitors);
+	   Prescriptionresponse p=new Prescriptionresponse();
+	   p.setPatientName(arr[0]);
+	   p.setDescription(arr[1]);
+	   p.setDoctorName(arr[2]);
+	   p.setDoctoremail(arr[3]);
+	  long phone= Long.parseLong(arr[4]);
+	   p.setDoctorphone(phone);
+	   
+	   return p;
 	
-	return prescription.findbyPatientname(name);
+			
 }
 }

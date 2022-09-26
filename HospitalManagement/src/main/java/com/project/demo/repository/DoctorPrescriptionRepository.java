@@ -13,11 +13,8 @@ import com.project.demo.model.*;
 
 public interface DoctorPrescriptionRepository extends JpaRepository<DoctorPrescription, Integer> {
 	
-@Query(value="select dp.description,dp.patientname,d.name,d.department,d.email,d.phone from doctor_prescription dp INNER JOIN appointment p ON dp.patientname=p.patientname and dp.patientname=?1",nativeQuery = true)
-DoctorPrescription findbyPatientname(String name); 
+
+    @Transactional
+	@Query("select patient.Patientname,dp.description,doctor.name,doctor.email,doctor.phone from DoctorPrescription dp LEFT JOIN Doctor doctor ON doctor.docid=dp.doctor.docid LEFT JOIN UserAppointment patient On patient.Patientname=?1 ")
+	String findbyPatientname(String name);
 }
-//SELECT *
-//FROM categories
-//LEFT JOIN user_category_subscriptions ON 
-//    user_category_subscriptions.category_id = categories.category_id
-//    and user_category_subscriptions.user_id =1

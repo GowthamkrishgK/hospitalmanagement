@@ -15,7 +15,7 @@ import com.project.demo.service.UserAppointmentService;
 public class AppointmentController {
 	@Autowired
 	private UserAppointmentService appservice;
-@PostMapping("/user/appointment/{user}/book")
+@PostMapping("/appointment/{user}/book")
 public UserAppointment book(@RequestBody AppointmentRequest req,@PathVariable("user")String user) {
 	         return  appservice.addAppointment(req, user);
 }

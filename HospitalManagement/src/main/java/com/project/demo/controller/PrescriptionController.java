@@ -9,20 +9,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.demo.model.DoctorPrescription;
 import com.project.demo.requests.PrescribeRequest;
+import com.project.demo.response.Prescriptionresponse;
 import com.project.demo.service.DoctorPrescriptionService;
 
 @RestController
 public class PrescriptionController {
+	
 	@Autowired
 	private DoctorPrescriptionService prescribeservice;
-@PostMapping("/doctor/prescription/add")
+@PostMapping("/prescription/add")
 public String addPrescription(@RequestBody PrescribeRequest pres) {
 	
 	 prescribeservice.addprescription(pres);
 	 return "prescribed" +pres.getPatientname();
 }
-@GetMapping("/viewPrescription/{name}")
-public DoctorPrescription viewPrescription(@PathVariable("name")String name) {
+@GetMapping("/prescription/viewPrescription/{name}")
+public Prescriptionresponse viewPrescription(@PathVariable("name")String name) {
 	return prescribeservice.viewPrescription(name);
 }
 }

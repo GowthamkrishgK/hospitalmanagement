@@ -25,7 +25,7 @@ public class DoctorPrescription implements Serializable {
 private int prescriptionid;
 @OneToOne(cascade = CascadeType.ALL)
 @JoinColumn(name="patientname")
-@JsonIgnoreProperties("patientname")
+@JsonIgnoreProperties("p")
 private UserAppointment patient;
 private Boolean isAvailable;
 
@@ -38,6 +38,7 @@ public void setIsAvailable(Boolean isAvailable) {
 private String description;
 @ManyToOne( cascade = CascadeType.ALL)
 @JoinColumn(name="docid")
+@JsonIgnoreProperties("docprescription")
 private Doctor doctor;
 public int getPrescriptionid() {
 	return prescriptionid;

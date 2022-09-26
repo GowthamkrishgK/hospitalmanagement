@@ -38,10 +38,12 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
 		http
 	.csrf().disable()
 		.authorizeRequests()
+//		.antMatchers("/**").permitAll()
 		.antMatchers("/user/appointment/**").hasAuthority(user_role)
 		.antMatchers(HttpMethod.POST,"/user/**").permitAll()
 		.antMatchers(HttpMethod.PUT,"/user/**").hasAuthority(user_role)
 		.antMatchers(HttpMethod.GET,"/user").hasAuthority(user_role)
+		.antMatchers("/appointment/**").hasAuthority(user_role)
 //		 this is user api auth for user entity
 		.antMatchers("/admin/**").hasAuthority(admin_role)
 //		this is api auth for admin role for user entity
@@ -49,6 +51,8 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.POST,"/doctor/**").permitAll()
 		.antMatchers(HttpMethod.PUT,"/doctor/**").hasAuthority(doctor_role)
 		.antMatchers(HttpMethod.GET,"/doctor").hasAuthority(doctor_role)
+		.antMatchers(HttpMethod.GET,"/prescription/**").hasAnyAuthority(user_role,doctor_role)
+		.antMatchers("/prescription/**").hasAuthority(doctor_role)
 //		   admin role
 	
 		.and().formLogin();
